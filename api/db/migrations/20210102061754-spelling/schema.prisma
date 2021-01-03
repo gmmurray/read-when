@@ -1,0 +1,56 @@
+datasource DS {
+  // optionally set multiple providers
+  // example: provider = ["sqlite", "postgresql"]
+  provider = "postgresql"
+  url = "***"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+model Queue {
+  id          Int         @id @default(autoincrement())
+  isPublic    Boolean     @default(false)
+  title       String
+  description String
+  category    String
+  ownerId     String
+  createdAt   DateTime    @default(now())
+  modifiedAt  DateTime    @default(now())
+  users       UserQueue[]
+  queueItems  QueueItem[]
+}
+
+model UserQueue {
+  queueId Int
+  userId  String
+  queue   Queue  @relation(fields: [queueId], references: [id])
+
+  @@id([queueId, userId])
+}
+
+model QueueItem {
+  id      Int             @id @default(autoincrement())
+  queueId Int
+  isbn    String
+  ordinal Int
+  queue   Queue           @relation(fields: [queueId], references: [id])
+  users   UserQueueItem[]
+}
+
+model UserQueueItem {
+  userId      String
+  queueItemId Int
+  status      ReadingStatus @default(NOT_STARTED)
+  queueItem   QueueItem     @relation(fields: [queueItemId], references: [id])
+
+  @@id([queueItemId, userId])
+}
+
+enum ReadingStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}

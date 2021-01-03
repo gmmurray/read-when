@@ -1,0 +1,121 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "UserList",
+      "field": "userListItems",
+      "type": "UserListItem",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UserListItem",
+      "field": "userListId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UserListItem",
+      "field": "userList",
+      "type": "List",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "UserListItem",
+          "field": "userList"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UserListItem",
+          "field": "userList"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[userListId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UserListItem",
+          "field": "userList"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UserListItem",
+      "field": "UserList",
+      "type": "UserList",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "UserListItem",
+          "field": "UserList"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UserListItem",
+          "field": "UserList"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[userListId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UserListItem",
+          "field": "UserList"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "UserListItem",
+      "field": "listId"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "UserListItem",
+      "field": "list"
+    }
+  ]
+}

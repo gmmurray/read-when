@@ -1,0 +1,21 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteField",
+      "model": "List",
+      "field": "UserListItem"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "UserListItem",
+      "field": "UserList"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "UserListItem",
+      "field": "userList",
+      "type": "UserList"
+    }
+  ]
+}

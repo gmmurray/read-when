@@ -1,0 +1,102 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateModel",
+      "model": "UserQueue"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UserQueue",
+      "field": "queueId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UserQueue",
+      "field": "userId",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UserQueue",
+      "field": "queue",
+      "type": "Queue",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "UserQueue",
+          "field": "queue"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UserQueue",
+          "field": "queue"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[queueId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UserQueue",
+          "field": "queue"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "UserQueue"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "UserQueue"
+        },
+        "directive": "id"
+      },
+      "argument": "",
+      "value": "[queueId, userId]"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "UserQueues"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Queue",
+      "field": "users",
+      "type": "UserQueue"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+datasource DS {
+  provider = "postgresql"
+  url = "***"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+model List {
+  id              Int            @id @default(autoincrement())
+  isPublic        Boolean        @default(false)
+  title           String
+  description     String
+  category        String
+  ownerIdentifier String
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @default(now())
+  userLists       UserList[]
+  listItems       ListItem[]
+  UserListItem    UserListItem[]
+}
+
+model UserList {
+  id             Int    @id @default(autoincrement())
+  listId         Int
+  userIdentifier String
+  list           List   @relation(fields: [listId], references: [id])
+}
+
+model ListItem {
+  id            Int            @id @default(autoincrement())
+  listId        Int
+  isbn          String
+  ordinal       Int
+  list          List           @relation(fields: [listId], references: [id])
+  userListItems UserListItem[]
+}
+
+model UserListItem {
+  id             Int           @id @default(autoincrement())
+  userIdentifier String
+  listItemId     Int
+  listId         Int
+  status         ReadingStatus @default(NOT_STARTED)
+  listItem       ListItem      @relation(fields: [listItemId], references: [id])
+  list           List          @relation(fields: [listId], references: [id])
+}
+
+enum ReadingStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}

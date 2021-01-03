@@ -1,0 +1,65 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "List",
+      "field": "UserListItem",
+      "type": "UserListItem",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UserListItem",
+      "field": "listId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UserListItem",
+      "field": "list",
+      "type": "List",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "UserListItem",
+          "field": "list"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UserListItem",
+          "field": "list"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[listId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UserListItem",
+          "field": "list"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    }
+  ]
+}

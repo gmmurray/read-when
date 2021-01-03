@@ -1,0 +1,59 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ListItem",
+          "field": "isbn"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "DeleteDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "ListItem",
+          "field": "ordinal"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "ListItem",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[id, isbn]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "ListItem",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[id, ordinal]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    }
+  ]
+}

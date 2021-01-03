@@ -1,0 +1,52 @@
+datasource DS {
+  provider = "postgresql"
+  url = "***"
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+model Queue {
+  id          Int         @id @default(autoincrement())
+  isPublic    Boolean     @default(false)
+  title       String
+  description String
+  category    String
+  owner       String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now())
+  users       UserQueue[]
+  queueItems  QueueItem[]
+}
+
+model UserQueue {
+  id      Int    @id @default(autoincrement())
+  queueId Int
+  user    String
+  queue   Queue  @relation(fields: [queueId], references: [id])
+}
+
+model QueueItem {
+  id      Int             @id @default(autoincrement())
+  queueId Int
+  isbn    String
+  ordinal Int
+  queue   Queue           @relation(fields: [queueId], references: [id])
+  users   UserQueueItem[]
+}
+
+model UserQueueItem {
+  id          Int           @id @default(autoincrement())
+  user        String
+  queueItemId Int
+  status      ReadingStatus @default(NOT_STARTED)
+  queueItem   QueueItem     @relation(fields: [queueItemId], references: [id])
+}
+
+enum ReadingStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}

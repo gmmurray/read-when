@@ -1,0 +1,29 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Queue",
+      "field": "owner",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Queue",
+      "field": "ownerId"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UserQueueItem",
+      "field": "user",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "UserQueueItem",
+      "field": "userId"
+    }
+  ]
+}

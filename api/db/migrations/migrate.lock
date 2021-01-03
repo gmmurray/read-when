@@ -1,0 +1,15 @@
+# Prisma Migrate lockfile v1
+
+20210102060220-initial
+20210102061754-spelling
+20210102230811-update-relations
+20210102232741-update-queue-date
+20210103003257-remove-id-names-for-non-foreign-key
+20210103004015-update-userqueue-relation
+20210103011334-name-changes
+20210103014211-add-list-to-userlistitem
+20210103015008-add-userlist-to-userlistitem
+20210103015207-add-userlist-to-userlistitems
+20210103071558-unique-fields-on-list-item
+20210103072022-unique-fields-on-list-item
+20210103072154-unique-fields-on-list-items
