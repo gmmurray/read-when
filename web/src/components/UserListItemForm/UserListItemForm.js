@@ -5,8 +5,11 @@ import {
   Label,
   TextField,
   NumberField,
+  CheckboxField,
   Submit,
+  SelectField,
 } from '@redwoodjs/forms';
+import { statusOptions } from 'src/shared/constants/userListItemStatus';
 
 const UserListItemForm = props => {
   const onSubmit = data => {
@@ -78,14 +81,41 @@ const UserListItemForm = props => {
         >
           Status
         </Label>
-        <TextField
+        <SelectField
           name="status"
           defaultValue={props.userListItem?.status}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
-        />
+          options={statusOptions}
+        >
+          <option value="">Please select</option>
+          <option value={statusOptions.notStarted.value}>
+            {statusOptions.notStarted.name}
+          </option>
+          <option value={statusOptions.inProgress.value}>
+            {statusOptions.inProgress.name}
+          </option>
+          <option value={statusOptions.completed.value}>
+            {statusOptions.completed.name}
+          </option>
+        </SelectField>
         <FieldError name="status" className="rw-field-error" />
+
+        <Label
+          name="owned"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Owned
+        </Label>
+        <CheckboxField
+          name="owned"
+          defaultChecked={props.userListItem?.owned}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
+        <FieldError name="owned" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

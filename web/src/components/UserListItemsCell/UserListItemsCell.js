@@ -9,6 +9,7 @@ export const QUERY = gql`
       userIdentifier
       listItemId
       status
+      owned
     }
   }
 `;

@@ -1,4 +1,3 @@
-import { ForbiddenError } from '@redwoodjs/api';
 import { db } from 'src/lib/db';
 import { getCurrentUser, hasRole, requireAuth } from 'src/lib/mockAuth';
 import { foreignKeyReplacement } from 'src/services/relationWorkaround';
@@ -45,7 +44,7 @@ export const userListItem = ({ id }) => {
 };
 
 export const createUserListItem = async ({ input }) => {
-  const uList = await userList({ id: input.id });
+  const uList = await userList({ id: input.userListId });
   await checkListAccess({
     id: uList.listId,
     checkIsOwner: true,

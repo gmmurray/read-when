@@ -25,6 +25,7 @@ const UPDATE_USER_LIST_ITEM_MUTATION = gql`
       listItemId
       status
       userListId
+      owned
     }
   }
 `;

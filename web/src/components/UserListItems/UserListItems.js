@@ -65,6 +65,7 @@ const UserListItemsList = ({ userListItems }) => {
             <th>User identifier</th>
             <th>List item id</th>
             <th>Status</th>
+            <th>Owned</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -75,6 +76,7 @@ const UserListItemsList = ({ userListItems }) => {
               <td>{truncate(userListItem.userIdentifier)}</td>
               <td>{truncate(userListItem.listItemId)}</td>
               <td>{truncate(userListItem.status)}</td>
+              <td>{checkboxInputTag(userListItem.owned)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

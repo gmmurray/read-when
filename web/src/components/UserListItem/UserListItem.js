@@ -72,6 +72,10 @@ const UserListItem = ({ userListItem }) => {
               <th>Status</th>
               <td>{userListItem.status}</td>
             </tr>
+            <tr>
+              <th>Owned</th>
+              <td>{checkboxInputTag(userListItem.owned)}</td>
+            </tr>
           </tbody>
         </table>
       </div>
