@@ -5,7 +5,6 @@ export const schema = gql`
     title: String!
     description: String!
     category: String!
-    ownerIdentifier: String!
     createdAt: DateTime!
     updatedAt: DateTime!
     userLists: [UserList]!
@@ -22,7 +21,6 @@ export const schema = gql`
     title: String!
     description: String!
     category: String!
-    ownerIdentifier: String!
   }
 
   input UpdateListInput {
@@ -30,7 +28,6 @@ export const schema = gql`
     title: String
     description: String
     category: String
-    ownerIdentifier: String
   }
 
   type Mutation {

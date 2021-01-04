@@ -86,22 +86,6 @@ const ListForm = props => {
         />
         <FieldError name="category" className="rw-field-error" />
 
-        <Label
-          name="ownerIdentifier"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Owner identifier
-        </Label>
-        <TextField
-          name="ownerIdentifier"
-          defaultValue={props.list?.ownerIdentifier}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-        <FieldError name="ownerIdentifier" className="rw-field-error" />
-
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save

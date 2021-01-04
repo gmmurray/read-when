@@ -5,6 +5,7 @@ export const schema = gql`
     listItemId: Int!
     userListId: Int!
     status: ReadingStatus!
+    owned: Boolean!
     listItem: ListItem!
     userList: UserList!
   }
@@ -17,19 +18,24 @@ export const schema = gql`
 
   type Query {
     userListItems: [UserListItem!]!
+    userListItems(listId: Int): [UserListItem!]!
     userListItem(id: Int!): UserListItem
   }
 
   input CreateUserListItemInput {
     userIdentifier: String!
     listItemId: Int!
-    status: ReadingStatus!
+    userListId: Int!
+    status: ReadingStatus
+    owned: Boolean
   }
 
   input UpdateUserListItemInput {
     userIdentifier: String
     listItemId: Int
+    userListId: Int
     status: ReadingStatus
+    owned: Boolean
   }
 
   type Mutation {

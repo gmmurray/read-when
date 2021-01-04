@@ -80,7 +80,6 @@ const ListsList = ({ lists }) => {
               <td>{truncate(list.title)}</td>
               <td>{truncate(list.description)}</td>
               <td>{truncate(list.category)}</td>
-              <td>{truncate(list.ownerIdentifier)}</td>
               <td>{timeTag(list.createdAt)}</td>
               <td>{timeTag(list.updatedAt)}</td>
               <td>

@@ -10,7 +10,6 @@ export const QUERY = gql`
       title
       description
       category
-      ownerIdentifier
       createdAt
       updatedAt
     }
@@ -24,7 +23,6 @@ const UPDATE_LIST_MUTATION = gql`
       title
       description
       category
-      ownerIdentifier
       createdAt
       updatedAt
     }

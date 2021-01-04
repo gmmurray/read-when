@@ -9,6 +9,7 @@ export const schema = gql`
 
   type Query {
     userLists: [UserList!]!
+    userLists(listId: Int): [UserList!]!
     userList(id: Int!): UserList
   }
 

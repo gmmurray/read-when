@@ -8,7 +8,6 @@ export const QUERY = gql`
       title
       description
       category
-      ownerIdentifier
       createdAt
       updatedAt
     }

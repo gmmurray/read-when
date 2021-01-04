@@ -56,6 +56,22 @@ const UserListItemForm = props => {
         <FieldError name="listItemId" className="rw-field-error" />
 
         <Label
+          name="userListId"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          User List Id
+        </Label>
+        <NumberField
+          name="userListId"
+          defaultValue={props.userListItem?.userListId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+        <FieldError name="userListId" className="rw-field-error" />
+
+        <Label
           name="status"
           className="rw-label"
           errorClassName="rw-label rw-label-error"

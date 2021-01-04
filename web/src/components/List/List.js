@@ -77,10 +77,6 @@ const List = ({ list }) => {
               <td>{list.category}</td>
             </tr>
             <tr>
-              <th>Owner identifier</th>
-              <td>{list.ownerIdentifier}</td>
-            </tr>
-            <tr>
               <th>Created at</th>
               <td>{timeTag(list.createdAt)}</td>
             </tr>

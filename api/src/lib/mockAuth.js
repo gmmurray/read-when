@@ -1,7 +1,7 @@
 import { AuthenticationError, ForbiddenError } from '@redwoodjs/api';
 
-//const type = 'admin';
-const type = 'nonAdmin';
+const type = 'admin';
+//const type = 'nonAdmin';
 //const type = 'anon';
 
 const adminUser = {

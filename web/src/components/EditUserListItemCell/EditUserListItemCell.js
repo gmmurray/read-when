@@ -9,6 +9,8 @@ export const QUERY = gql`
       userIdentifier
       listItemId
       status
+      userListId
+      owned
     }
   }
 `;
@@ -22,6 +24,7 @@ const UPDATE_USER_LIST_ITEM_MUTATION = gql`
       userIdentifier
       listItemId
       status
+      userListId
     }
   }
 `;
