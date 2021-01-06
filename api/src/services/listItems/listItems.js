@@ -1,7 +1,9 @@
 import { db } from 'src/lib/db';
+import { requireAuth } from 'src/lib/mockAuth';
 import { checkListAccess, lists } from 'src/services/lists/lists';
 import { foreignKeyReplacement } from 'src/services/relationWorkaround';
 import { deleteUserListItemsForListItem } from '../userListItems/userListItems';
+import { validateListItem } from '../validation/listItems';
 
 export const listItems = async () => {
   const availableLists = await lists();
@@ -10,6 +12,9 @@ export const listItems = async () => {
     where: {
       listId: {
         in: availableLists.map(l => l.id),
+      },
+      include: {
+        list: true,
       },
     },
   });
@@ -27,6 +32,7 @@ export const listItemIds = ({ listId }) => {
 export const listItem = async ({ id }) => {
   const item = await db.listItem.findOne({
     where: { id },
+    include: { list: true },
   });
 
   // Throws an error if the related list is unavailable
@@ -40,6 +46,10 @@ export const listItem = async ({ id }) => {
 };
 
 export const createListItem = async ({ input }) => {
+  requireAuth();
+  // Throws an error if fields are invalid
+  validateListItem(input);
+
   // Throws an error if the related list is unavailable
   await checkListAccess({
     id: input.listId,
@@ -53,7 +63,12 @@ export const createListItem = async ({ input }) => {
 };
 
 export const updateListItem = async ({ id, input }) => {
+  requireAuth();
+  // Throws an error if fields are invalid
+  validateListItem(input);
+
   const item = await listItem({ id });
+
   let tasks = [];
 
   // Check access to old and new lists if they changed

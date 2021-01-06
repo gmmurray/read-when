@@ -3,15 +3,20 @@ import { getCurrentUser, hasRole, requireAuth } from 'src/lib/mockAuth';
 import { foreignKeyReplacement } from 'src/services/relationWorkaround';
 import { checkListAccess } from 'src/services/lists/lists';
 import { userList } from 'src/services/userLists/userLists';
+import { validateUserListItem } from '../validation/userListItems';
 
 export const userListItems = () => {
-  if (hasRole('admin')) return db.userListItem.findMany();
+  if (hasRole('admin'))
+    return db.userListItem.findMany({
+      include: { listItem: true, userList: true },
+    });
 
   requireAuth();
   const user = getCurrentUser();
 
   return db.userListItem.findMany({
     where: { userIdentifier: user.id },
+    include: { listItem: true, userList: true },
   });
 };
 
@@ -26,6 +31,7 @@ export const userListItemsWithArgs = args => {
 
   return db.userListItem.findMany({
     where: { userIdentifier: user.id, ...where },
+    include: { listItem: true, userList: true },
   });
 };
 
@@ -33,6 +39,7 @@ export const userListItem = ({ id }) => {
   if (hasRole('admin')) {
     return db.userListItem.findOne({
       where: { id },
+      include: { listItem: true, userList: true },
     });
   }
 
@@ -40,10 +47,14 @@ export const userListItem = ({ id }) => {
   const user = getCurrentUser();
   return db.userListItem.findOne({
     where: { id, userIdentifier: user.id },
+    include: { listItem: true, userList: true },
   });
 };
 
 export const createUserListItem = async ({ input }) => {
+  requireAuth();
+  validateUserListItem(input);
+
   const uList = await userList({ id: input.userListId });
   await checkListAccess({
     id: uList.listId,
@@ -57,6 +68,8 @@ export const createUserListItem = async ({ input }) => {
 
 export const updateUserListItem = async ({ id, input }) => {
   requireAuth();
+  validateUserListItem(input);
+
   const user = getCurrentUser();
   const where = hasRole('admin') ? {} : { userIdentifier: user.id };
 

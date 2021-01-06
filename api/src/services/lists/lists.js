@@ -7,6 +7,7 @@ import { deleteListOwnersForList } from 'src/services/listOwners/listOwners';
 import { deleteListItemsForList, listItemIds } from '../listItems/listItems';
 import { deleteUserListsForList } from '../userLists/userLists';
 import { deleteUserListItemsForList } from '../userListItems/userListItems';
+import { validateList } from '../validation/lists';
 
 export const lists = () => {
   if (hasRole('admin')) return db.list.findMany();
@@ -32,6 +33,7 @@ export const list = async ({ id }) => {
 
 export const createList = ({ input }) => {
   requireAuth();
+  validateList(input);
   const user = getCurrentUser();
 
   return db.list.create({
@@ -47,6 +49,7 @@ export const createList = ({ input }) => {
 };
 
 export const updateList = async ({ id, input }) => {
+  validateList(input);
   await checkListAccess({ id, checkIsOwner: true, checkIsPublic: false });
 
   return db.list.update({

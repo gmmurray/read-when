@@ -1,9 +1,9 @@
-import { ForbiddenError } from '@redwoodjs/api';
 import { db } from 'src/lib/db';
 import { getCurrentUser, hasRole, requireAuth } from 'src/lib/mockAuth';
 import { foreignKeyReplacement } from 'src/services/relationWorkaround';
 import { checkListAccess } from 'src/services/lists/lists';
 import { deleteUserListItemsForUserList } from 'src/services/userListItems/userListItems';
+import { validateUserList } from '../validation/userList';
 
 export const userLists = () => {
   if (hasRole('admin')) return db.userList.findMany();
@@ -13,6 +13,7 @@ export const userLists = () => {
 
   return db.userList.findMany({
     where: { userIdentifier: user.id },
+    include: { list: true, userListItems: true },
   });
 };
 
@@ -26,6 +27,7 @@ export const userListsWithArgs = args => {
   }
   return db.userList.findMany({
     where: { userIdentifier: user.id, ...where },
+    include: { list: true, userListItems: true },
   });
 };
 
@@ -33,6 +35,7 @@ export const userList = ({ id }) => {
   if (hasRole('admin')) {
     return db.userList.findOne({
       where: { id },
+      include: { list: true, userListItems: true },
     });
   }
 
@@ -43,10 +46,14 @@ export const userList = ({ id }) => {
       id,
       userIdentifier: user.id,
     },
+    include: { list: true, userListItems: true },
   });
 };
 
 export const createUserList = async ({ input }) => {
+  requireAuth();
+  validateUserList(input);
+
   await checkListAccess({
     id: input.listId,
     checkIsOwner: true,
@@ -60,6 +67,8 @@ export const createUserList = async ({ input }) => {
 
 export const updateUserList = async ({ id, input }) => {
   requireAuth();
+  validateUserList(input);
+
   const user = getCurrentUser();
   const where = hasRole('admin') ? {} : { userIdentifier: user.id };
   const uList = await userList({ id });
